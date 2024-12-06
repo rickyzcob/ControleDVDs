@@ -29,6 +29,9 @@ php artisan serve
 
 Rotas para gerenciamento dos clientes.
 
+## Listar Clientes
+GET /clientes
+
 ## Cadastrar Clientes
 POST /clientes
 JSON 
@@ -54,6 +57,37 @@ JSON
 DELETE /clientes/id
 
 Rotas para gerenciamento dos produtos e estoque.
+
+## Listar os Produtos
+GET /produtos
+
+## Cadastrar Produto
+POST /produtos
+JSON 
+{
+    "title":"Harry Potter e a pedra filosofal", 
+    "gender":"Fantasia", 
+    "availability":"yes",
+    "price":"20.00",
+    "quantity":"6"
+}
+
+## Vizualizar Produto
+GET /produtos/id
+
+## Editar Produto
+PUT /produtos/id
+JSON 
+{
+    "title":"Harry Potter e a pedra filosofal", 
+    "gender":"Fantasia", 
+    "availability":"yes",
+    "price":"20.00",
+    "quantity":"6"
+}
+
+## Deletar Produto
+DELETE /produtos/id
 
 Rotas para adicionar os pedidos.
    
