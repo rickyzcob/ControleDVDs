@@ -1,96 +1,88 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
-
 
 # API RESTful em Laravel para o gerenciamento de uma loja de aluguéis de DVDs
 
-O sistema para cadastro de DVDs e clientes, gerenciar o estoque de DVDs e alterar os preços dos aluguéis de forma automática.
-
-## Instruções para instalação
-
-Nessessário rodar os comandos abaixo para utilização do projeto.
-1. Alterar o arquivo .env.example para .env
-2. Colocar as informações do banco de dados.
-3. php artisan migrate
-4. php artisan queue:work
-5. php artisan schedule:run
-
-Caso queria rodar o projeto localmente execute o comando
-php artisan serve
-   
-
-## Rotas API para gerenciamento.
-
-Rotas para gerenciamento dos clientes.
-
-## Listar Clientes
-GET /clientes
-
-## Cadastrar Clientes
-POST /clientes
-JSON 
-{
-    "name":"Ricardo Oliveira Lima", 
-    "email":"rickyzbr@gmail.com", 
-    "phone":"11990037413"
-}
-
-## Vizualizar Cliente
-GET /clientes/id
-
-## Editar Cliente
-PUT /clientes/id
-JSON 
-{
-    "name":"Ricardo Oliveira Lima", 
-    "email":"rickyzbr@gmail.com", 
-    "phone":"11990037413"
-}
-
-## Deletar Cliente
-DELETE /clientes/id
-
-Rotas para gerenciamento dos produtos e estoque.
-
-## Listar os Produtos
-GET /produtos
-
-## Cadastrar Produto
-POST /produtos
-JSON 
-{
-    "title":"Harry Potter e a pedra filosofal", 
-    "gender":"Fantasia", 
-    "availability":"yes",
-    "price":"20.00",
-    "quantity":"6"
-}
-
-## Vizualizar Produto
-GET /produtos/id
-
-## Editar Produto
-PUT /produtos/id
-JSON 
-{
-    "title":"Harry Potter e a pedra filosofal", 
-    "gender":"Fantasia", 
-    "availability":"yes",
-    "price":"20.00",
-    "quantity":"6"
-}
-
-## Deletar Produto
-DELETE /produtos/id
-
-Rotas para adicionar os pedidos.
-   
+Sistema para cadastro de DVDs e clientes, gerenciar o estoque de DVDs e alterar os preços dos aluguéis de forma automática.
 
 
+## Para rodar o projeto
+
+Clone o projeto
+
+```bash
+  git clone https://github.com/rickyzcob/ControleDVDs.git
+```
+
+Entre no diretório do projeto
+
+```bash
+  cd my-project
+```
+
+Roda a migration
+
+```bash
+  php artisan migrate
+```
+
+Execute os comandos
+
+```bash
+  php artisan queue:work
+  php artisan schedule:run
+```
+
+Inicie o servidor
+
+```bash
+  php artisan serve
+```
+
+
+## Documentação da API
+
+#### Retorna todos os clientes
+
+```http
+  GET /clientes
+```
+
+| Parâmetro   | Tipo       |JSON                           |
+| :---------- | :--------- | :---------------------------------- |
+|  | `string` | { "title":"Harry Potter e a pedra filosofal", "gender":"Fantasia", "availability":"yes", "price":"20.00", "quantity":"6" } |
+
+#### Retorna um cliente 
+
+```http
+  GET /clientes/id
+```
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `id`      | `string` |  |
+
+
+#### Atualização do cliente
+
+```http
+  PUT /clientes/id
+```
+
+| Parâmetro   | Tipo       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `id` | `string` |  |
+
+#### Deletar cliente
+
+```http
+  DELETE /clientes/{id}
+```
+
+| Parâmetro   | Tipo       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `id`  | `string` | |
+
+
+## Documentação
+
+[Documentação](https://link-da-documentação)
 
