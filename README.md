@@ -7,31 +7,32 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
 ## API RESTful em Laravel para o gerenciamento de uma loja de aluguéis de DVDs
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+O sistema para cadastro de DVDs e clientes, gerenciar o estoque de DVDs e alterar os preços dos aluguéis de forma automática.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Instruções para instalação
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Nessessário rodar os comandos abaixo para utilização do projeto.
+1. Alterar o arquivo .env.example para .env
+2. Colocar as informações do banco de dados.
+3. php artisan migrate
+4. php artisan queue:work
+5. php artisan schedule:run
 
-## Laravel Sponsors
+Caso queria rodar o projeto localmente execute o comando
+php artisan serve
+   
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Rotas API para gerenciamento.
+
+Rotas para gerenciamento dos clientes.
+
+Rotas para gerenciamento dos produtos e estoque.
+
+Rotas para adicionar os pedidos.
+   
 
 
 
