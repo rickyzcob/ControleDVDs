@@ -8,7 +8,7 @@
 </p>
 
 
-## API RESTful em Laravel para o gerenciamento de uma loja de aluguéis de DVDs
+# API RESTful em Laravel para o gerenciamento de uma loja de aluguéis de DVDs
 
 O sistema para cadastro de DVDs e clientes, gerenciar o estoque de DVDs e alterar os preços dos aluguéis de forma automática.
 
