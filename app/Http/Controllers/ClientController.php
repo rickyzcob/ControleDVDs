@@ -98,6 +98,14 @@ class ClientController extends Controller
         try {
             $clientDB = Clients::query()->findOrFail($id);
 
+            if(!$clientDB){
+                return  response()->json([
+                    'status' => 'success',
+                    'code' => 200,
+                    'message' => 'Cliente não encontrado !',
+                ]);
+            }
+
             return  response()->json([
                 'status' => 'success',
                 'code' => 200,
@@ -142,6 +150,14 @@ class ClientController extends Controller
         $requestValidated = $validator->validated();
         try {
             $clientDB = Clients::query()->findOrFail($id);
+
+            if(!$clientDB){
+                return  response()->json([
+                    'status' => 'success',
+                    'code' => 200,
+                    'message' => 'Cliente não encontrado !',
+                ]);
+            }
             $clientDB->update($requestValidated);
 
             return  response()->json([
@@ -166,6 +182,15 @@ class ClientController extends Controller
     {
         try {
             $clientDB = Clients::query()->find($id);
+
+            if(!$clientDB){
+                return  response()->json([
+                    'status' => 'success',
+                    'code' => 200,
+                    'message' => 'Cliente não encontrado !',
+                ]);
+            }
+
             $clientDB->delete();
 
             return  response()->json([

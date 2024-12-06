@@ -101,6 +101,13 @@ class ProductController extends Controller
         try {
             $productDB = Products::query()->findOrFail($id);
 
+            if(!$productDB){
+                return  response()->json([
+                    'status' => 'success',
+                    'code' => 200,
+                    'message' => 'Produto não encontrado !',
+                ]);
+            }
             return  response()->json([
                 'status' => 'success',
                 'code' => 200,
@@ -148,6 +155,13 @@ class ProductController extends Controller
 
         try {
             $productDB = Products::query()->findOrFail($id);
+            if(!$productDB){
+                return  response()->json([
+                    'status' => 'success',
+                    'code' => 200,
+                    'message' => 'Produto não encontrado !',
+                ]);
+            }
             $productDB->update($requestValidated);
 
             return  response()->json([
@@ -172,6 +186,14 @@ class ProductController extends Controller
     {
         try {
             $productDB = Products::query()->find($id);
+
+            if(!$productDB){
+                return  response()->json([
+                    'status' => 'success',
+                    'code' => 200,
+                    'message' => 'Produto não encontrado !',
+                ]);
+            }
             $productDB->delete();
 
             return  response()->json([
