@@ -99,11 +99,11 @@ class ProductController extends Controller
     public function show(string $id)
     {
         try {
-            $productDB = Products::query()->findOrFail($id);
+            $productDB = Products::query()->find($id);
 
             if(!$productDB){
                 return  response()->json([
-                    'status' => 'success',
+                    'status' => 'error',
                     'code' => 200,
                     'message' => 'Produto não encontrado !',
                 ]);
@@ -154,10 +154,10 @@ class ProductController extends Controller
         $requestValidated = $validator->validated();
 
         try {
-            $productDB = Products::query()->findOrFail($id);
+            $productDB = Products::query()->find($id);
             if(!$productDB){
                 return  response()->json([
-                    'status' => 'success',
+                    'status' => 'error',
                     'code' => 200,
                     'message' => 'Produto não encontrado !',
                 ]);
@@ -189,7 +189,7 @@ class ProductController extends Controller
 
             if(!$productDB){
                 return  response()->json([
-                    'status' => 'success',
+                    'status' => 'error',
                     'code' => 200,
                     'message' => 'Produto não encontrado !',
                 ]);

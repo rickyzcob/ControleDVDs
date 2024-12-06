@@ -18,7 +18,7 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($pageSize = null, $orderBy = null)
+    public function index()
     {
         try {
             $orderDB = Order::query()->with(['client','items'])->orderBy('created_at', 'desc')->get();
@@ -212,7 +212,14 @@ class OrderController extends Controller
         $requestValidated = $validator->validated();
 
         try {
-            $order = Order::query()->with(['items', 'client'])->findOrFail($id);
+            $order = Order::query()->with(['items', 'client'])->find($id);
+            if(!$order) {
+                return  response()->json([
+                    'status' => 'error',
+                    'code' => 400,
+                    'message' => 'Pedido nao encontrado'
+                ]);
+            }
 
             if($order['status'] == 'return') {
                 return  response()->json([

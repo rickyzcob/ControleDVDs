@@ -96,11 +96,12 @@ class ClientController extends Controller
     public function show(string $id)
     {
         try {
-            $clientDB = Clients::query()->findOrFail($id);
+            $clientDB = Clients::query()->find($id);
 
             if(!$clientDB){
+
                 return  response()->json([
-                    'status' => 'success',
+                    'status' => 'error',
                     'code' => 200,
                     'message' => 'Cliente não encontrado !',
                 ]);
@@ -149,11 +150,11 @@ class ClientController extends Controller
 
         $requestValidated = $validator->validated();
         try {
-            $clientDB = Clients::query()->findOrFail($id);
+            $clientDB = Clients::query()->find($id);
 
             if(!$clientDB){
                 return  response()->json([
-                    'status' => 'success',
+                    'status' => 'error',
                     'code' => 200,
                     'message' => 'Cliente não encontrado !',
                 ]);
@@ -185,7 +186,7 @@ class ClientController extends Controller
 
             if(!$clientDB){
                 return  response()->json([
-                    'status' => 'success',
+                    'status' => 'error',
                     'code' => 200,
                     'message' => 'Cliente não encontrado !',
                 ]);
