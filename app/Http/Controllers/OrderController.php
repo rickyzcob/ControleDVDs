@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\CheckAvailableJob;
+use App\Models\Clients;
 use App\Models\Order;
 use App\Models\OrdersProducts;
 use App\Models\Products;
@@ -82,6 +83,15 @@ class OrderController extends Controller
         $requestValidated = $validator->validated();
 
         try {
+
+            $clientDB = Clients::query()->find($requestValidated['client_id']);
+            if(!$clientDB) {
+                return  response()->json([
+                    'status' => 'error',
+                    'code' => 400,
+                    'message' => 'Cliente não cadastrado'
+                ]);
+            }
 
             DB::beginTransaction();
 
