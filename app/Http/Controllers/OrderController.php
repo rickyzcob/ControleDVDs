@@ -186,7 +186,9 @@ class OrderController extends Controller
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
-            'status' => 'required|string',
+            'client_id' => 'required|string',
+            'products.*.product_id' =>'required',
+            'products.*.quantity' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -197,9 +199,34 @@ class OrderController extends Controller
             ]);
         }
 
+        $requestValidated = $validator->validated();
+
         try {
-            $order = Order::query()->findOrFail($id);
-            $order->update($validator->validated()['status']);
+            $order = Order::query()->with(['items', 'client'])->findOrFail($id);
+
+            if($order['status'] == 'return') {
+                return  response()->json([
+                    'status' => 'error',
+                    'code' => 400,
+                    'message' => 'Pedido já foi feito a devolução e nao pode ser editado.'
+                ]);
+            }
+
+            foreach ($requestValidated['products'] as $key => $value) {
+                $id = $requestValidated['products'][$key]['id'] ?? false;
+
+                if ($id) {
+                    OrdersProducts::query()->find($id)->update([
+                        'quantity' => $requestValidated['products'][$key]['quantity'],
+                    ]);
+                } else {
+                    OrdersProducts::query()->create([
+                        'order_id' => $id,
+                        'product_id' => $requestValidated['products'][$key]['product_id'],
+                        'quantity' => $requestValidated['products'][$key]['quantity'],
+                    ]);
+                }
+            }
 
             return  response()->json([
                 'status' => 'success',
