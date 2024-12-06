@@ -29,6 +29,30 @@ php artisan serve
 
 Rotas para gerenciamento dos clientes.
 
+## Cadastrar Clientes
+POST /clientes
+JSON 
+{
+    "name":"Ricardo Oliveira Lima", 
+    "email":"rickyzbr@gmail.com", 
+    "phone":"11990037413"
+}
+
+## Vizualizar Cliente
+GET /clientes/id
+
+## Editar Cliente
+PUT /clientes/id
+JSON 
+{
+    "name":"Ricardo Oliveira Lima", 
+    "email":"rickyzbr@gmail.com", 
+    "phone":"11990037413"
+}
+
+## Deletar Cliente
+DELETE /clientes/id
+
 Rotas para gerenciamento dos produtos e estoque.
 
 Rotas para adicionar os pedidos.
