@@ -27,18 +27,18 @@ class ProductController extends Controller
                 $productDB = $productDB->get();
             }
 
-            return [
+            return  response()->json([
                 'status' => 'success',
                 'code' => 200,
                 'data' => $productDB,
                 'message' => 'sucesso'
-            ];
+            ]);
         } catch (Exception $exception){
-            return [
+            return  response()->json([
                 'status' => 'error',
                 'code' => 400,
                 'message' => 'erro na requisiçao'
-            ];
+            ]);
         }
     }
 
@@ -64,11 +64,11 @@ class ProductController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return [
+            return  response()->json([
                 'status' => 400,
                 'error' => 'validation',
                 'message' => $validator->errors(),
-            ];
+            ]);
         }
 
         $requestValidated = $validator->validated();
@@ -78,18 +78,18 @@ class ProductController extends Controller
             $productDB = Products::query()->with(['stock'])->create($requestValidated);
             $productDB->stock()->create(['quantity' => $requestValidated['quantity']]);
 
-            return [
+            return  response()->json([
                 'status' => 'success',
                 'code' => 200,
                 'data' => $productDB,
                 'message' => 'Produto Adicionado com sucesso'
-            ];
+            ]);
         } catch (Exception $exception) {
-            return [
+            return  response()->json([
                 'status' => 'error',
                 'code' => 400,
                 'message' => 'erro na requisiçao'
-            ];
+            ]);
         }
     }
 
@@ -101,17 +101,17 @@ class ProductController extends Controller
         try {
             $productDB = Products::query()->findOrFail($id);
 
-            return [
+            return  response()->json([
                 'status' => 'success',
                 'code' => 200,
                 'data' => $productDB,
-            ];
+            ]);
         } catch (Exception $exception) {
-            return [
+            return  response()->json([
                 'status' => 'error',
                 'code' => 400,
                 'message' => 'erro na requisiçao'
-            ];
+            ]);
         }
     }
 
@@ -137,11 +137,11 @@ class ProductController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return [
+            return  response()->json([
                 'status' => 400,
                 'error' => 'validation',
                 'message' => $validator->errors(),
-            ];
+            ]);
         }
 
         $requestValidated = $validator->validated();
@@ -150,12 +150,12 @@ class ProductController extends Controller
             $productDB = Products::query()->findOrFail($id);
             $productDB->update($requestValidated);
 
-            return [
+            return  response()->json([
                 'status' => 'success',
                 'code' => 200,
                 'data' => $productDB,
                 'message' => 'Produto atualizado com sucesso'
-            ];
+            ]);
         } catch (Exception $exception) {
             return [
                 'status' => 'error',
@@ -174,17 +174,17 @@ class ProductController extends Controller
             $productDB = Products::query()->find($id);
             $productDB->delete();
 
-            return [
+            return  response()->json([
                 'status' => 'success',
                 'code' => 200,
                 'message' => 'Produto deletado com sucesso !',
-            ];
+            ]);
         } catch (Exception $exception) {
-            return [
+            return  response()->json([
                 'status' => 'error',
                 'code' => 400,
                 'message' => 'erro na requisiçao'
-            ];
+            ]);
         }
     }
 }

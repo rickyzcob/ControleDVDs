@@ -28,18 +28,18 @@ class ClientController extends Controller
                 $clientDB = $clientDB->get();
             }
 
-            return [
+            return response()->json([
                 'status' => 'success',
                 'code' => 200,
                 'data' => $clientDB,
                 'message' => 'sucesso'
-            ];
+            ]) ;
         } catch (Exception $exception){
-            return [
+            return  response()->json([
                 'status' => 'error',
                 'code' => 400,
                 'message' => 'erro na requisiçao'
-            ];
+            ]);
         }
     }
 
@@ -63,11 +63,11 @@ class ClientController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return [
+            return  response()->json([
                 'status' => 400,
                 'error' => 'validation',
                 'message' => $validator->errors(),
-            ];
+            ]);
         }
 
         $requestValidated = $validator->validated();
@@ -75,18 +75,18 @@ class ClientController extends Controller
         try {
             $clientDB = Clients::query()->create($requestValidated);
 
-            return [
+            return  response()->json([
                 'status' => 'success',
                 'code' => 200,
                 'data' => $clientDB,
                 'message' => 'Cliente Adicionado com sucesso'
-            ];
+            ]);
         } catch (Exception $exception) {
-            return [
+            return  response()->json([
                 'status' => 'error',
                 'code' => 400,
                 'message' => 'erro na requisiçao'
-            ];
+            ]);
         }
     }
 
@@ -98,17 +98,17 @@ class ClientController extends Controller
         try {
             $clientDB = Clients::query()->findOrFail($id);
 
-            return [
+            return  response()->json([
                 'status' => 'success',
                 'code' => 200,
                 'data' => $clientDB,
-            ];
+            ]);
         } catch (Exception $exception) {
-            return [
+            return  response()->json([
                 'status' => 'error',
                 'code' => 400,
                 'message' => 'erro na requisiçao'
-            ];
+            ]);
         }
     }
 
@@ -132,11 +132,11 @@ class ClientController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return [
+            return  response()->json([
                 'status' => 400,
                 'error' => 'validation',
                 'message' => $validator->errors(),
-            ];
+            ]);
         }
 
         $requestValidated = $validator->validated();
@@ -144,18 +144,18 @@ class ClientController extends Controller
             $clientDB = Clients::query()->findOrFail($id);
             $clientDB->update($requestValidated);
 
-            return [
+            return  response()->json([
                 'status' => 'success',
                 'code' => 200,
                 'data' => $clientDB,
                 'message' => 'Cliente atualizado com sucesso'
-            ];
+            ]);
         } catch (Exception $exception) {
-            return [
+            return  response()->json([
                 'status' => 'error',
                 'code' => 400,
                 'message' => 'erro na requisiçao'
-            ];
+            ]);
         }
     }
 
@@ -168,17 +168,17 @@ class ClientController extends Controller
             $clientDB = Clients::query()->find($id);
             $clientDB->delete();
 
-            return [
+            return  response()->json([
                 'status' => 'success',
                 'code' => 200,
                 'message' => 'Cliente deletado com sucesso !',
-            ];
+            ]);
         } catch (Exception $exception) {
-            return [
+            return  response()->json([
                 'status' => 'error',
                 'code' => 400,
                 'message' => 'erro na requisiçao'
-            ];
+            ]);
         }
     }
 }

@@ -37,18 +37,18 @@ class OrderController extends Controller
                 }
             }
 
-            return [
+            return  response()->json([
                 'status' => 'success',
                 'code' => 200,
                 'data' => $return,
                 'message' => 'sucesso'
-            ];
+            ]);
         } catch (Exception $exception){
-            return [
+            return  response()->json([
                 'status' => 'error',
                 'code' => 400,
                 'message' => 'erro na requisiçao'
-            ];
+            ]);
         }
     }
 
@@ -72,11 +72,11 @@ class OrderController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return [
+            return  response()->json([
                 'status' => 400,
                 'error' => 'validation',
                 'message' => $validator->errors(),
-            ];
+            ]);
         }
 
         $requestValidated = $validator->validated();
@@ -91,11 +91,11 @@ class OrderController extends Controller
                 $productDB = Products::query()->with(['stock'])->findOrFail($itemData['product_id']);
 
                 if($itemData['quantity'] > $productDB['stock']['quantity']) {
-                    return [
+                    return  response()->json([
                         'status' => 'error',
                         'code' => 400,
                         'message' => 'O Produto ' .$productDB['title']. ' tem quantidade maior que disponível no estoque .'
-                    ];
+                    ]);
                 }
 
                 OrdersProducts::query()->create([
@@ -116,20 +116,18 @@ class OrderController extends Controller
             ])->dispatch();
 
             DB::commit();
-
-
-            return [
+            return  response()->json([
                 'status' => 'success',
                 'code' => 200,
                 'data' => $orderDB,
                 'message' => 'Pedido Adicionado com sucesso'
-            ];
+            ]);
         } catch (Exception $exception) {
-            return [
+            return  response()->json([
                 'status' => 'error',
                 'code' => 400,
                 'message' => 'erro na requisiçao'
-            ];
+            ]);
         }
     }
 
@@ -141,11 +139,11 @@ class OrderController extends Controller
         try {
             $orderDB = Order::query()->with(['client','items'])->find($id);
             if(!$orderDB) {
-                return [
+                return  response()->json([
                     'status' => 'error',
                     'code' => 404,
                     'message' => 'Pedido nao encontrado'
-                ];
+                ]);
             }
 
             $return = [];
@@ -160,11 +158,11 @@ class OrderController extends Controller
                 $return['items'][$index]['price'] = $item['product']['price'];
                 $return['items'][$index]['total_price'] = $item['product']['total_price'];
             }
-            return [
+            return  response()->json([
                 'status' => 'success',
                 'code' => 200,
                 'data' => $return,
-            ];
+            ]);
         } catch (Exception $exception) {
             return [
                 'status' => 'error',
@@ -188,33 +186,33 @@ class OrderController extends Controller
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
-            'status' => 'required',
+            'status' => 'required|string',
         ]);
 
         if ($validator->fails()) {
-            return [
+            return  response()->json([
                 'status' => 400,
                 'error' => 'validation',
                 'message' => $validator->errors(),
-            ];
+            ]);
         }
 
         try {
             $order = Order::query()->findOrFail($id);
             $order->update($validator->validated()['status']);
 
-            return [
+            return  response()->json([
                 'status' => 'success',
                 'code' => 200,
                 'data' => $order,
-                'message' => 'Cliente atualizado com sucesso'
-            ];
+                'message' => 'Pedido atualizado com sucesso'
+            ]);
         } catch (Exception $exception) {
-            return [
+            return  response()->json([
                 'status' => 'error',
                 'code' => 400,
                 'message' => 'erro na requisiçao'
-            ];
+            ]);
         }
     }
 
@@ -226,19 +224,19 @@ class OrderController extends Controller
             $orderDB = Order::query()->find($id);
 
             if(!$orderDB) {
-                return [
+                return  response()->json([
                     'status' => 'error',
                     'code' => 404,
                     'message' => 'Pedido nao encontrado'
-                ];
+                ]);
             }
 
             if($orderDB['status'] == 'return') {
-                return [
+                return  response()->json([
                     'status' => 'error',
                     'code' => 404,
                     'message' => 'O pedido selecionado já foi efetuado a devolução'
-                ];
+                ]);
             }
 
             foreach ($orderDB['items'] as $item) {
@@ -255,19 +253,19 @@ class OrderController extends Controller
 
             DB::commit();
 
-            return [
+            return  response()->json([
                 'status' => 'success',
                 'code' => 200,
                 'data' => $orderDB,
                 'message' => 'Devolução realizada com sucesso'
-            ];
+            ]);
         } catch (Exception $exception) {
             DB::rollback();
-            return [
+            return  response()->json([
                 'status' => 'error',
                 'code' => 400,
                 'message' => 'erro na requisiçao'
-            ];
+            ]);
         }
     }
 
