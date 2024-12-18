@@ -37,7 +37,7 @@ Inicie o servidor
   php artisan serve
 ```
 
-#### Primeiro Cadastar os cliente e produtos para utilização dos pedidos.
+#### Primeiro Cadastar os clientes e produtos para utilização dos pedidos.
 
 ## Documentação da API Clientes
 
